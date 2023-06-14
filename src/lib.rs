@@ -9,6 +9,7 @@ pub mod winter;
 pub mod risc0;
 
 pub use eth_stark;
+pub use barretenberg;
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Debug, ValueEnum)]
 pub enum Algorithm {
@@ -21,6 +22,7 @@ pub enum Algorithm {
     Winter,
     Risc0,
     Stark,
+    Barregenberg,
 }
 
 pub fn run(algorithm: Algorithm, max_exponent: usize) {
@@ -35,5 +37,6 @@ pub fn run(algorithm: Algorithm, max_exponent: usize) {
         Winter => winter::run(max_exponent),
         Risc0 => risc0::run(max_exponent),
         Stark => eth_stark::run(max_exponent, 4),
+        Barregenberg => barretenberg::run(max_exponent),
     }
 }

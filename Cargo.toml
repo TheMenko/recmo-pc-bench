@@ -15,6 +15,7 @@ rayon = "1.6.1"
 tracing = { version = "0.1.37", features = ["log"] }
 tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
 eth-stark = { path = "eth-stark" }
+barretenberg = { path = "barretenberg" }
 
 # BLST
 blstrs = "0.6.1"
