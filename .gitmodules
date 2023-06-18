@@ -2,3 +2,7 @@
 	path = eth-stark/vendor-eth-stark
 	url = https://github.com/reilabs/ethSTARK.git
 	branch = wip/macos-compile
+[submodule "barretenberg/vendor-barretenberg"]
+	path = barretenberg/vendor-barretenberg
+	url = https://github.com/reilabs/barretenberg.git
+	branch = "ios"
