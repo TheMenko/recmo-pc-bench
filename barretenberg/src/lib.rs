@@ -23,14 +23,13 @@ pub fn bench(circuit_size: usize) -> f64 {
         }
     }
 
-    unsafe { free_input(input) };
-
     duration / count as f64
 }
 
 pub fn run(circuit_size: usize) {
     println!("size,duration,throughput");
-    for i in circuit_size {
+    for i in 10..circuit_size {
+        let size = 1_usize << i;
         let duration = bench(circuit_size);
         let throughput = size as f64 / duration;
         println!("{size},{duration},{throughput}");

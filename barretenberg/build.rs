@@ -20,8 +20,6 @@ fn main() {
         println!("cargo:rustc-link-lib=static={libname}");
     }
     println!("cargo:rustc-link-lib=c++");
-    println!("cargo:rustc-link-lib=static=glog");
-    println!("cargo:rustc-link-lib=static=gflags");
     println!("cargo:rustc-link-search={}", libdir.display());
     println!("cargo:rustc-link-search={}", Path::new(&cargodir).join("vendor-barretenberg/vendor/lib").display());
 
