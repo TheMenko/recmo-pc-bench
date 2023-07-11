@@ -7,5 +7,4 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 git submodule update --remote
 
-cmake ./vendor-barretenberg/cpp
-cd ./vendor-barretenberg/cpp && make all
+cd vendor-barretenberg/cpp/ && sh bootstrap.sh
