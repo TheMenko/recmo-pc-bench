@@ -1,22 +1,24 @@
 use std::{time::Instant, ffi::c_void};
 
 extern "C" {
-    fn create_composer(circuit_size: usize) -> *mut c_void;
-    fn commit(composer: *mut c_void, length: usize);
-    fn free_composer(composer: *mut c_void);
+    fn create_input(size: usize) -> *mut c_void;
+    fn create_prover_factory() -> *mut c_void;
+    fn commit(input: *mut c_void, n: usize);
+    fn free_crs(ptr: *mut c_void);
 }
 
-pub fn bench(circuit_size: usize) -> f64 {
+pub fn bench(size: usize) -> f64 {
     let mut count = 0;
     let mut duration = 0.0;
 
-    let composer = unsafe { create_composer(circuit_size) };
+    let input = unsafe { create_input(size) };
+    let prover_factory = unsafe { create_prover_factory() };
 
     loop {
         count += 1;
         let now = Instant::now();
 
-        unsafe { commit(composer, 1 << circuit_size) };
+        unsafe { commit(input, size) };
 
         duration += now.elapsed().as_secs_f64();
         if duration > 5.0 {
@@ -24,7 +26,7 @@ pub fn bench(circuit_size: usize) -> f64 {
         }
     }
 
-    unsafe { free_composer(composer) };
+    unsafe { free_crs(prover_factory) };
     duration / count as f64
 }
 
@@ -32,7 +34,7 @@ pub fn run(max_exponent: usize) {
     println!("size,duration,throughput");
     for i in 10..max_exponent {
         let size = 1_usize << i;
-        let duration = bench(i);
+        let duration = bench(256);
         let throughput = size as f64 / duration;
         println!("{size},{duration},{throughput}");
 
