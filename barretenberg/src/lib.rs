@@ -16,7 +16,7 @@ pub fn bench(circuit_size: usize) -> f64 {
         count += 1;
         let now = Instant::now();
 
-        unsafe { commit(composer, 1 << 4) };
+        unsafe { commit(composer, 1 << circuit_size) };
 
         duration += now.elapsed().as_secs_f64();
         if duration > 5.0 {
