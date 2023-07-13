@@ -5,6 +5,7 @@ extern "C" {
     fn create_prover_factory() -> *mut c_void;
     fn commit(input: *mut c_void, n: usize, prover_factory: *mut c_void);
     fn free_crs(ptr: *mut c_void);
+    fn free_input(ptr: *mut c_void);
 }
 
 pub fn bench(size: usize) -> f64 {
@@ -27,6 +28,7 @@ pub fn bench(size: usize) -> f64 {
     }
 
     unsafe { free_crs(prover_factory) };
+    unsafe { free_input(input)};
     duration / count as f64
 }
 
