@@ -3,7 +3,7 @@ use std::{time::Instant, ffi::c_void};
 extern "C" {
     fn create_input(size: usize) -> *mut c_void;
     fn create_prover_factory() -> *mut c_void;
-    fn commit(input: *mut c_void, n: usize);
+    fn commit(input: *mut c_void, n: usize, prover_factory: *mut c_void);
     fn free_crs(ptr: *mut c_void);
 }
 
@@ -18,7 +18,7 @@ pub fn bench(size: usize) -> f64 {
         count += 1;
         let now = Instant::now();
 
-        unsafe { commit(input, size) };
+        unsafe { commit(input, size, prover_factory) };
 
         duration += now.elapsed().as_secs_f64();
         if duration > 5.0 {
